@@ -20,14 +20,14 @@
             <div class="card mb-0">
               <div class="card-body">
                 <h3 class="text-center mb-4">WELCOME</h3>
-                <form method="POST" action="{{ route('register') }}">
-                    @csrf
+                <form method="POST" action="{{ route('register_post') }}">
+                  @csrf
                   <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" require>
+                    <label for="username" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="username" name="username" require>
                   </div>
                   <div class="mb-3">
-                    <label for="email" class="form-label">Email Address</label>
+                    <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" name="email" require>
                   </div>
                   <div class="mb-3">
@@ -41,18 +41,18 @@
                   <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign Up</button>
                   <div class="d-flex align-items-center justify-content-center">
                     <p class="fs-4 mb-0 fw-bold">Already have an Account?</p>
-                    <a class="text-primary fw-bold ms-2" href="{{ route('login') }}">Sign In</a>
+                    <a class="text-primary fw-bold ms-2" href="{{ route('login_get') }}">Sign In</a>
                   </div>
                 </form>
                 <!-- Show errors -->
                 @if ($errors->any())
-                  <div class="alert alert-danger mt-2">
-                      <ul>
-                          @foreach ($errors->all() as $error)
-                              <li>{{ $error }}</li>
-                          @endforeach
-                      </ul>
-                  </div>
+                <div class="alert alert-danger mt-2">
+                  <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                  </ul>
+                </div>
                 @endif
               </div>
             </div>

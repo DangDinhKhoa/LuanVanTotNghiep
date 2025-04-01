@@ -1,22 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\BannerController;
 
+Route::get('/admin/layout', [UserController::class, 'index'])->middleware('auth');
 
-Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
+/* Authenticate */
+Route::get('/', [AuthController::class, 'showLoginForm'])->name('login_get');
 Route::post('/login', [AuthController::class, 'login'])->name('login_post');
+Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register_get');
+Route::post('/register', [AuthController::class, 'register'])->name('register_post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout_post');
 
-Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
-Route::post('/register', [AuthController::class, 'register']);
+/* User */
+Route::get('/user', [UserController::class, 'index'])->name('user_get');
+Route::patch('/user/{id}/toggle', [UserController::class, 'changeStatus'])->name('admin.change_status_user');
 
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware('auth');
-
-
-Route::get('/', function () {
-    return view('welcome');
-});
+/* Banner */
+Route::get('/banner', [BannerController::class, 'index'])->name('banner_get');

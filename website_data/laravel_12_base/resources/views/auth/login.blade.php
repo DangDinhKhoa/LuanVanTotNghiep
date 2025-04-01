@@ -21,7 +21,7 @@
               <div class="card-body">
                 <h3 class="text-center mb-5">WELCOME</h3>
                 <form method="POST" action="{{ route('login_post') }}">
-                    @csrf
+                  @csrf
                   <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" name="email" id="email" require>
@@ -31,20 +31,21 @@
                     <input type="password" class="form-control" name="password" id="password" require>
                   </div>
                   <div class="d-flex align-items-center justify-content-between mb-4">
-                    <a class="text-primary fw-bold ms-2" href="{{ route('register') }}">Create an account</a>
+                    <a class="text-primary fw-bold ms-2" href="{{ route('register_get') }}">Create an account</a>
                     <a class="text-primary fw-bold" href="./index.html">Forgot Password ?</a>
                   </div>
+                  <!-- Hiển thị lỗi chung nếu có -->
+                  @if ($errors->any())
+                  <div class="alert alert-danger">
+                    <ul>
+                      @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                      @endforeach
+                    </ul>
+                  </div>
+                  @endif
                   <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Log In</button>
                 </form>
-                @if ($errors->any())
-                  <div class="alert alert-danger mt-2">
-                      <ul>
-                          @foreach ($errors->all() as $error)
-                              <li>{{ $error }}</li>
-                          @endforeach
-                      </ul>
-                  </div>
-                @endif
               </div>
             </div>
           </div>
