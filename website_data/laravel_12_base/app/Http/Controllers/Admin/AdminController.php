@@ -52,7 +52,7 @@ class AdminController extends Controller
         }
         $request->validate([
             'username' => 'required|string|max:255',
-            'phone_number' => 'nullable|regex:/^[0-9]{10}$/',
+            'phone_number' => 'required|string|regex:/^[0-9]{10,11}$/',
             'address' => 'max:255',
         ]);
         $now = date('Y-m-d H:i:s');

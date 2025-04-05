@@ -1,17 +1,10 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <!-- Hiển thị thông báo -->
-            @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
+      
             <h3 class="mb-4">THÔNG TIN CÁ NHÂN</h3>
             <form method="POST" action="{{ route('info_admin_update', $user->id) }}">
                 @csrf
-                @method('PATCH')
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" value="{{ old('username', $user->username) }}">
@@ -73,6 +66,13 @@
                     <a href="{{ route('dashboard_get') }}" class="btn btn-secondary">QUAY LẠI</a>
                     <button type="submit" class="btn btn-primary">CẬP NHẬT THÔNG TIN</button>
                 </div>
+                <!-- Hiển thị thông báo -->
+                @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
             </form>
         </div>
     </div>

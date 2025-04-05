@@ -14,18 +14,11 @@ class UserController extends Controller
         @session_start();
     }
 
-    public function index()
-    {
-        $template = 'admin.user.index';
-        return view('user.layout');
-    }
 
     public function getInfo(Request $request, $id)
     {
         $user = User::findOrFail($id); // Tìm người dùng theo ID
-        $template = 'admin.info.index';
-        return view('admin.layout', compact(
-            'template',
+        return view('user.info.index', compact(
             'user'
         ));
     }
@@ -47,7 +40,7 @@ class UserController extends Controller
         }
         $request->validate([
             'username' => 'required|string|max:255',
-            'phone_number' => 'nullable|regex:/^[0-9]{10}$/',
+            'phone_number' => 'nullable|regex:/^[0-9]{10,11}$/',
             'address' => 'max:255',
         ]);
         $now = date('Y-m-d H:i:s');
@@ -57,6 +50,6 @@ class UserController extends Controller
         $user->updated_at = $now;
         $user->created_at = $user->create_at;
         $user->save();
-        return redirect()->route('info_admin_get', ['id' => $id])->with('success', 'Cập nhật thông tin thành công!');
+        return redirect()->route('info_user_get', ['id' => $id])->with('success', 'Cập nhật thông tin thành công!');
     }
 }

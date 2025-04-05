@@ -12,7 +12,7 @@
         <!-- Sidebar -->
         @include('user.components.sidebar')
         <!--  Main wrapper -->
-        <div class="body-wrapper" style="width: 75%;position: fixed;right: 0; ">
+        <div class="body-wrapper" style="width: 75%; height: 100%;position: fixed;right: 0; overflow-y: auto">
             <!--  Header -->
             @include('user.components.nav')
             <!-- Body -->

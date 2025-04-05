@@ -51,7 +51,6 @@
                 </li>
                 <li class="sidebar-item">
                     <form method="POST" action="{{ route('logout_post') }}" aria-expanded="false">
-
                         @csrf
                         <button type="submit" class="sidebar-link btn btn-transparent border-0">
                             <span><i class="ti ti-logout"></i></span>

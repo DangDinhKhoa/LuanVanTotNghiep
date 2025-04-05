@@ -19,7 +19,12 @@ Route::controller(AuthController::class)->group(function () {
 // User
 Route::middleware('auth')->prefix('user')->group(function () {
     Route::controller(App\Http\Controllers\User\HomeController::class)->group(function () {
-        Route::get('/layout','index');
+        Route::get('/layout','index')->name('homepage');
+    });
+
+    Route::controller(App\Http\Controllers\User\UserController::class)->group(function () {
+        Route::get('/get-info-user/{id}', 'getInfo')->name('info_user_get');
+        Route::post('/update-info-user/{id}', 'updateInfo')->name('info_user_update');
     });
 });
 
