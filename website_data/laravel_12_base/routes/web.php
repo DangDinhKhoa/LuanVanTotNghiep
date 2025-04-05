@@ -1,33 +1,49 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Http;
 
 
-/* Authenticate */
-Route::get('/', [AuthController::class, 'showLoginForm'])->name('login_get');
-Route::post('/login', [AuthController::class, 'login'])->name('login_post');
-Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register_get');
-Route::post('/register', [AuthController::class, 'register'])->name('register_post');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout_post');
+// Authenticate
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/', 'showLoginForm')->name('login_get');
+    Route::post('/login', 'login')->name('login_post');
+    Route::get('/register', 'showRegistrationForm')->name('register_get');
+    Route::post('/register', 'register')->name('register_post');
+    Route::post('/logout', 'logout')->name('logout_post');
+});
 
-/* User */
-Route::get('/user/layout', [App\Http\Controllers\User\UserController::class, 'index'])->middleware('auth');
+// User
+Route::middleware('auth')->prefix('user')->group(function () {
+    Route::controller(App\Http\Controllers\User\HomeController::class)->group(function () {
+        Route::get('/layout','index');
+    });
+});
 
-/* Admin */
-Route::get('/admin/layout', [DashboardController::class, 'index'])->middleware('auth');
-Route::get('/admin/get-dashboard', [DashboardController::class, 'index'])->name('dashboard_get');
-Route::get('/admin/get-table-user', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('user_table_get');
-Route::patch('/admin/change-user-status/{id}/', [App\Http\Controllers\Admin\UserController::class, 'changeStatus'])->name('admin.change_status_user');
-Route::get('/admin/get-info-admin/{id}', [App\Http\Controllers\Admin\AdminController::class, 'getInfo'])->name('info_admin_get');
-Route::patch('/admin/update-info-admin/{id}', [App\Http\Controllers\Admin\AdminController::class, 'updateInfo'])->name('info_admin_update');
-Route::get('/admin/get-table-admin', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin_table_get');
-Route::patch('/admin/change-admin-status/{id}/', [App\Http\Controllers\Admin\AdminController::class, 'changeStatus'])->name('admin.change_status_admin');
-Route::get('/admin/add-admin', [App\Http\Controllers\Admin\AdminController::class, 'showAddAdminForm'])->name('add_admin_get');
-Route::post('/admin/add-admin', [App\Http\Controllers\Admin\AdminController::class, 'addAdmin'])->name('add_admin_post');
+// Admin
+Route::middleware('auth')->prefix('admin')->group(function () {
+    Route::controller(DashboardController::class)->group(function () {
+        Route::get('/layout', 'index');
+        Route::get('/get-dashboard', 'index')->name('dashboard_get');
+    });
+
+    Route::controller(App\Http\Controllers\Admin\UserController::class)->group(function () {
+        Route::get('/get-table-user', 'index')->name('user_table_get');
+        Route::patch('/change-user-status/{id}', 'changeStatus')->name('admin.change_status_user');
+    });
+
+    Route::controller(App\Http\Controllers\Admin\AdminController::class)->group(function () {
+        Route::get('/get-info-admin/{id}', 'getInfo')->name('info_admin_get');
+        Route::patch('/update-info-admin/{id}', 'updateInfo')->name('info_admin_update');
+        Route::get('/get-table-admin', 'index')->name('admin_table_get');
+        Route::patch('/change-admin-status/{id}', 'changeStatus')->name('admin.change_status_admin');
+        Route::get('/add-admin', 'showAddAdminForm')->name('add_admin_get');
+        Route::post('/add-admin', 'addAdmin')->name('add_admin_post');
+    });
+});
 
 
 /* Banner */

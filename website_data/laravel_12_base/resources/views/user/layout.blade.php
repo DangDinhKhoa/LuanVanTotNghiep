@@ -12,13 +12,11 @@
         <!-- Sidebar -->
         @include('user.components.sidebar')
         <!--  Main wrapper -->
-        <div class="body-wrapper">
+        <div class="body-wrapper" style="width: 75%;position: fixed;right: 0; ">
             <!--  Header -->
             @include('user.components.nav')
             <!-- Body -->
-            <div class="container-fluid">
-                @include($template)
-            </div>
+            @include($template)
         </div>
     </div>
     @include('user.components.script')

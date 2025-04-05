@@ -16,9 +16,7 @@
       <!--  Header -->
       @include('admin.components.nav')
       <!-- Body -->
-      <div class="container-fluid">
-        @include($template)
-      </div>
+      @include($template)
     </div>
   </div>
   @include('admin.components.script')

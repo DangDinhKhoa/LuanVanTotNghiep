@@ -7,7 +7,7 @@
   <script src="{{ asset('assets/js/dashboard.js') }}"></script>
 
   <!-- Datatable js -->
-     <script src="//cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+  <script src="//cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
   <script src="//cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/3.2.0/js/dataTables.buttons.js"></script>
   <script src="https://cdn.datatables.net/buttons/3.2.0/js/buttons.dataTables.js"></script>
