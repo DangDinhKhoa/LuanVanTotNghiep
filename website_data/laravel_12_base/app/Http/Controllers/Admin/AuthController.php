@@ -40,9 +40,16 @@ class AuthController extends Controller
                     'email' => 'Tài khoản của bạn đã bị khóa. Vui lòng liên hệ quản trị viên.',
                 ])->withInput();
             }
-            // Nếu status = 1, tiếp tục đăng nhập
-            $request->session()->regenerate();
-            return redirect()->intended('/admin/layout');
+            if($user->level == 0){
+                // Đăng nhập người dùng
+                $request->session()->regenerate();
+                return redirect()->intended('/user/layout');
+            }
+            else if($user->level == 1){
+                // Đăng nhập admin
+                $request->session()->regenerate();
+                return redirect()->intended('/admin/layout');
+            }
         }
         // Nếu thông tin đăng nhập không hợp lệ
         return back()->withErrors([

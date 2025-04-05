@@ -15,10 +15,10 @@ class BannerController extends Controller
     {
         // Danh sách ảnh (có thể thay bằng dữ liệu từ database sau)
         $images = [
-            ['url' => asset('assets\images\banners\Flux_Dev_An_artistic_representation_of_smart_devices_featuring_0.jpeg'), 'alt' => 'Ảnh 1'],
-            ['url' => asset('assets\images\banners\Flux_Dev_An_artistic_representation_of_smart_devices_featuring_1.jpeg'), 'alt' => 'Ảnh 2'],
-            ['url' => asset('assets\images\banners\Flux_Dev_An_artistic_representation_of_smart_devices_featuring_2.jpeg'), 'alt' => 'Ảnh 3'],
-            ['url' => asset('assets\images\banners\Flux_Dev_An_artistic_representation_of_smart_devices_featuring_3.jpeg'), 'alt' => 'Ảnh 4'],
+            ['url' => asset('assets\images\banners\Flux_Dev_An_artistic_representation_of_smart_devices_featuring_0.jpeg'), 'alt' => 'Banner 1'],
+            ['url' => asset('assets\images\banners\Flux_Dev_An_artistic_representation_of_smart_devices_featuring_1.jpeg'), 'alt' => 'Banner 2'],
+            ['url' => asset('assets\images\banners\Flux_Dev_An_artistic_representation_of_smart_devices_featuring_2.jpeg'), 'alt' => 'Banner 3'],
+            ['url' => asset('assets\images\banners\Flux_Dev_An_artistic_representation_of_smart_devices_featuring_3.jpeg'), 'alt' => 'Banner 4'],
         ];
         $template = 'admin.banner.index';
         return view('admin.layout', compact(

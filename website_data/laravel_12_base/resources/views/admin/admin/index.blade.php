@@ -10,7 +10,10 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">DANH SÁCH NGƯỜI DÙNG</h3>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3 class="card-title mb-0">DANH SÁCH QUẢN TRỊ VIÊN</h3>
+                    <a class="btn btn-success" href="{{ route('add_admin_get') }}">Thêm quản trị viên <i class="ti ti-plus"></i></a>
+                </div>
             </div>
             <div class="card-body">
                 <table class="table table-bordered table-hover" id="myTable">
@@ -54,7 +57,7 @@
                             </td>
                             <td>
                                 <!-- Nút Mở/Khóa -->
-                                <form action="{{ route('admin.change_status_user', $user->id) }}" method="POST" style="display:inline;">
+                                <form action="{{ route('admin.change_status_admin', $user->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('PATCH')
                                     @php
@@ -66,7 +69,6 @@
                                         {{ ucfirst($action) }}
                                     </button>
                                 </form>
-                                <a href="{{ route('banner_get') }}" class="btn btn-sm btn-info mt-2">Xem banner đã tạo</a>
                             </td>
                         </tr>
                         @empty
